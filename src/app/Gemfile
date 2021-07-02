@@ -9,3 +9,5 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 gem "httparty", "~> 0.18.1"
 
 gem "sinatra", "~> 2.1"
+
+gem "libui", "~> 0.0.8"
