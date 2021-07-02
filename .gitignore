@@ -1,0 +1,5 @@
+shards.lock
+Gemfile.lock
+
+lib/
+bundle/
