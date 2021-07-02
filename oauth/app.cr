@@ -5,7 +5,9 @@ oauth = Authcord.new(
     id: ENV["CLIENT_ID"],
     secret: ENV["CLIENT_SECRET"],
     redirect: ENV["REDIRECT_URI"]
-) 
+)
+
+relay = "https://localhost:9999/relay"
 
 
 get "/" do |env|
@@ -17,12 +19,10 @@ get "/callback" do |env|
     code = env.params.query["code"]
     token = oauth.authenticate(code)
 
-    client = oauth.create_client()
+    acc = oauth.data["access_token"]
+    ref = oauth.data["refresh_token"]
 
-    p client.get(
-        "/api/v8/users/@me",
-        HTTP::Headers{"Authorization" => token}
-    ).body.to_s
+    env.redirect "#{relay}?acc=#{acc}&ref=#{ref}"
 end
 
 

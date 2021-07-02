@@ -4,8 +4,11 @@ require "http/client"
 
 
 class Authcord
+    getter data : Hash(String, JSON::Any)
+
     def initialize(id = "", secret = "", redirect = "")
         @id = id
+        @data = {} of String => JSON::Any
         @secret = secret
         @redirect = redirect
         @cli = OAuth2::Client.new(
@@ -34,7 +37,9 @@ class Authcord
             }
         )
 
-        return "Bearer #{JSON.parse(res.body).as_h["access_token"]}"
+        @data = JSON.parse(res.body).as_h
+
+        return "Bearer #{@data["access_token"]}"
     end
 
     def create_client()
