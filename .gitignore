@@ -2,4 +2,6 @@ shards.lock
 Gemfile.lock
 
 lib/
-bundle/
+cache/
+.bundle/
+stickers/
